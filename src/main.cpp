@@ -10,7 +10,7 @@ void on_initialize(const string_t& address)
     // Build our listener's URI from the configured address and the hard-coded path "blackjack/dealer"
 
     uri_builder uri(address);
-    uri.append_path(U("blackjack/dealer"));
+    uri.append_path(U("customer"));
 
     auto addr = uri.to_uri().to_string();
     g_httpDealer = std::unique_ptr<Customer>(new Customer(addr));
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 {
 #if 0
     std::cout << "Hello World!\n";
-    
+
     return 0;
 #else
     utility::string_t port = U("34568");

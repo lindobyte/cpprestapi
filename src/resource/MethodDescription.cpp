@@ -1,4 +1,4 @@
-#include "MethodDescription.h"
+#include "MethodDescription.hpp"
 
 MethodDescription::MethodDescription(std::string type,
                                      int pathParamLen,

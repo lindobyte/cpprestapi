@@ -1,5 +1,7 @@
-#include "../../webservice.h"
-#include "../AbstractResource.h"
+#pragma once
+
+#include "../../Webservice.hpp"
+#include "../AbstractResource.hpp"
 
 using namespace web;
 using namespace http;

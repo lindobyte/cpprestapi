@@ -1,4 +1,4 @@
-#include "AbstractResource.h"
+#include "AbstractResource.hpp"
 
 using namespace std;
 using namespace web;

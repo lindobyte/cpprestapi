@@ -1,4 +1,4 @@
-#include "../resource/customer/Customer.h"
+#include "../resource/customer/Customer.hpp"
 
 std::unique_ptr<Customer> g_httpDealer;
 

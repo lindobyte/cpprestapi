@@ -1,4 +1,6 @@
-#include "../webservice.h"
+#pragma once
+
+#include "../Webservice.hpp"
 
 class AbstractResource
 {

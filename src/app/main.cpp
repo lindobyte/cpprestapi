@@ -1,7 +1,4 @@
-#include <iostream>
-
-//AbstractResource.cpp
-#include "resource/customer/Customer.h"
+#include "../resource/customer/Customer.h"
 
 std::unique_ptr<Customer> g_httpDealer;
 

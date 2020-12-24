@@ -7,7 +7,7 @@ using namespace http;
 using namespace web::http::experimental::listener;
 
 Customer::Customer(utility::string_t url)
-    : AbstractResource(url)
+    : Resource(url)
 {
     /*m_listener.support(methods::GET, std::bind(&Customer::handle_get, this, std::placeholders::_1));
     m_listener.support(methods::PUT, std::bind(&Customer::handle_put, this, std::placeholders::_1));

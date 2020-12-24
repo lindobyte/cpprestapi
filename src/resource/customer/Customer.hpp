@@ -1,14 +1,14 @@
 #pragma once
 
 #include "../../Webservice.hpp"
-#include "../AbstractResource.hpp"
+#include "../Resource.hpp"
 
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-class Customer : public AbstractResource
+class Customer : public Resource
 {
 public:
     //Customer() {}

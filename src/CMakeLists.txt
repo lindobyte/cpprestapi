@@ -4,13 +4,13 @@ endif()
 
 add_library(${WS_LIB_NAME}
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/customer/Customer.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/resource/AbstractResource.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/resource/Resource.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/MethodDescription.cpp)
 
 # speed up compilation
 target_precompile_headers(${WS_LIB_NAME} PRIVATE
                           ${CMAKE_CURRENT_SOURCE_DIR}/Webservice.hpp
-                          ${CMAKE_CURRENT_SOURCE_DIR}/resource/AbstractResource.hpp)
+                          ${CMAKE_CURRENT_SOURCE_DIR}/resource/Resource.hpp)
 
 target_link_libraries(${WS_LIB_NAME}
                       cpprest

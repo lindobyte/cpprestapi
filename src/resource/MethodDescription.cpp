@@ -1,20 +1,19 @@
 #include "MethodDescription.hpp"
 
-MethodDescription::MethodDescription(std::string type,
+MethodDescription::MethodDescription(enum MethodDescription::type type,
                                      int pathParamLen,
                                      std::unordered_map<std::string, std::string> header,
-                                     std::set<std::string> requiredParam,
-                                     std::set<std::string> optionalParam)
+                                     std::unordered_set<std::string> requiredParam,
+                                     std::unordered_set<std::string> optionalParam)
     : type(type),
       pathParamLen(pathParamLen),
       header(header),
       requiredParam(requiredParam),
       optionalParam(optionalParam)
 {
-
 }
 
-std::string MethodDescription::getType() const
+const enum MethodDescription::type MethodDescription::getType() const
 {
     return type;
 }
@@ -24,17 +23,17 @@ int MethodDescription::getPathParamLen() const
     return pathParamLen;
 }
 
-std::unordered_map<std::string, std::string> MethodDescription::getHeader() const
+const std::unordered_map<std::string, std::string>& MethodDescription::getHeader() const
 {
     return header;
 }
 
-std::set<std::string> MethodDescription::getRequiredParam() const
+const std::unordered_set<std::string>& MethodDescription::getRequiredParam() const
 {
     return requiredParam;
 }
 
-std::set<std::string> MethodDescription::getOptionalParam() const
+const std::unordered_set<std::string>& MethodDescription::getOptionalParam() const
 {
     return optionalParam;
 }

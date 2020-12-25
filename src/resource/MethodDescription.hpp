@@ -1,29 +1,40 @@
 #pragma once
 
-#include <set>
-#include <string>
+#include "../Webservice.hpp"
+#include <unordered_set>
 #include <unordered_map>
+#include <string>
 
 class MethodDescription
 {
 public:
-    //method (string), header (hash), requiredParameter (set), optionalParameter (set), pathParamLen (int)
-    MethodDescription(std::string type,
-                      int pathParamLen,
-                      std::unordered_map<std::string, std::string> header,
-                      std::set<std::string> requiredParam,
-                      std::set<std::string> optionalParam);
+    enum class type {
+        GET,
+        PUT,
+        POST,
+        DELETE
+    };
 
-    std::string getType() const;
+    //method (string), header (hash), requiredParameter (set), optionalParameter (set), pathParamLen (int)
+    MethodDescription(enum MethodDescription::type type,
+                      int pathParamLen = 0,
+                      std::unordered_map<std::string, std::string> header = {
+                          {header::key::contentType, header::value::applicationJson},
+                          {header::key::accept,      header::value::applicationJson}
+                      },
+                      std::unordered_set<std::string> requiredParam = {},
+                      std::unordered_set<std::string> optionalParam = {});
+
+    const enum MethodDescription::type getType() const;
     int getPathParamLen() const;
-    std::unordered_map<std::string, std::string> getHeader() const;
-    std::set<std::string> getRequiredParam() const;
-    std::set<std::string> getOptionalParam() const;
+    const std::unordered_map<std::string, std::string>& getHeader() const;
+    const std::unordered_set<std::string>& getRequiredParam() const;
+    const std::unordered_set<std::string>& getOptionalParam() const;
 
 private:
-    std::string type;
+    MethodDescription::type type;
     int pathParamLen;
     std::unordered_map<std::string, std::string> header;
-    std::set<std::string> requiredParam;
-    std::set<std::string> optionalParam;
+    std::unordered_set<std::string> requiredParam;
+    std::unordered_set<std::string> optionalParam;
 };

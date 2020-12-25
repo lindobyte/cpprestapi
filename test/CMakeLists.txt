@@ -2,6 +2,9 @@ if (UNIX)
   add_definitions(-Wno-sign-compare -Wno-enum-compare)
 endif()
 
+include_directories("${PROJECT_SOURCE_DIR}/src"
+                    "${PROJECT_SOURCE_DIR}/src/resource")
+
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/test")
 #set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/test")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/test")

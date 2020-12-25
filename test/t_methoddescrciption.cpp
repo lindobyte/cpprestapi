@@ -22,7 +22,6 @@ TEST(methodDescription, standardValues)
 
     const unordered_set<string> optionalParam = method.getOptionalParam();
     EXPECT_TRUE(optionalParam.empty());
-
 }
 
 TEST(methodDescription, specifiedValues)
@@ -52,7 +51,6 @@ TEST(methodDescription, specifiedValues)
     EXPECT_EQ(optionalParam.count("oparam1"), 1);
     EXPECT_EQ(optionalParam.count("oparam2"), 1);
     EXPECT_EQ(optionalParam.count("oparam"),  0);
-
 }
 
 

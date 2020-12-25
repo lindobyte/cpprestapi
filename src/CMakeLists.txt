@@ -17,11 +17,4 @@ target_link_libraries(${WS_LIB_NAME}
                       ssl
                       crypto)
 
-#set_target_properties(${WS_LIB_NAME}
-#    PROPERTIES
-#    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build"
-#    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build"
-#    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build"
-#)
-
 add_subdirectory(app)

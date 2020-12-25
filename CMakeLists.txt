@@ -18,5 +18,8 @@ set(WS_LIB_NAME  ${CMAKE_PROJECT_NAME})
 set(WS_EXE_NAME  "${CMAKE_PROJECT_NAME}_httpd")
 set(WS_TEST_NAME "t_${CMAKE_PROJECT_NAME}")
 
+add_custom_target(test
+                  COMMAND make && cd build/test && ./${WS_TEST_NAME})
+
 add_subdirectory(src)
 add_subdirectory(test)

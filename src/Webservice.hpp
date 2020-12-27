@@ -6,12 +6,13 @@
 #include "cpprest/uri.h"
 #include <string>
 
-namespace header {
-    namespace key {
-        const std::string contentType = "content-type";
-        const std::string accept      = "accept";
-    }
-    namespace value {
-        const std::string applicationJson = "application/json";
-    }
-}
+class headerKey {
+public:
+    static const utility::string_t contentType;
+    static const utility::string_t accept;
+};
+
+class headerValue {
+public:
+    static const utility::string_t applicationJson;
+};

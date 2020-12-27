@@ -2,12 +2,12 @@
 
 #include "../Webservice.hpp"
 
-class Resource
+class ResourceController
 {
 public:
-    Resource(utility::string_t &url);
+    ResourceController(utility::string_t &url);
 
-    ~Resource();
+    ~ResourceController();
 
     void handleRequest(web::http::http_request message);
 
@@ -15,10 +15,10 @@ public:
     pplx::task<void> close();
 
 protected:
-    virtual void handle_get(web::http::http_request message);
-    virtual void handle_put(web::http::http_request message);
-    virtual void handle_post(web::http::http_request message);
-    virtual void handle_delete(web::http::http_request message);
+    virtual void handleGet(web::http::http_request &message);
+    virtual void handlePut(web::http::http_request &message);
+    virtual void handlePost(web::http::http_request &message);
+    virtual void handleDelete(web::http::http_request &message);
 
 #if 0
     /// It validates required information into the Http headers.

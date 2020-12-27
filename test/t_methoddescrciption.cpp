@@ -7,15 +7,15 @@ TEST(methodDescription, standardValues)
 {
     int pathParamLen;
 
-    MethodDescription method(MethodDescription::type::GET);
+    MethodDescription method;
 
     pathParamLen = method.getPathParamLen();
     EXPECT_EQ(pathParamLen, 0);
 
     const unordered_map<string, string> header = method.getHeader();
     ASSERT_EQ(header.size(), 2);
-    EXPECT_EQ(header.at(header::key::contentType), header::value::applicationJson);
-    EXPECT_EQ(header.at(header::key::accept),      header::value::applicationJson);
+    EXPECT_EQ(header.at(headerKey::contentType), headerValue::applicationJson);
+    EXPECT_EQ(header.at(headerKey::accept),      headerValue::applicationJson);
 
     const unordered_set<string> requiredParam = method.getRequiredParam();
     EXPECT_TRUE(requiredParam.empty());
@@ -26,8 +26,7 @@ TEST(methodDescription, standardValues)
 
 TEST(methodDescription, specifiedValues)
 {
-    MethodDescription method(MethodDescription::type::PUT,
-                             2,
+    MethodDescription method(2,
                              {{"key1", "value1"},{"key2","value2"}},
                              {"param1","param2","param3", "param1"},
                              {"oparam1", "oparam2"});

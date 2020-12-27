@@ -7,7 +7,11 @@ using namespace http;
 using namespace web::http::experimental::listener;
 
 Customer::Customer(utility::string_t url)
-    : Resource(url)
+    : ResourceController(url)/*,
+      getDescription(MethodDescription::type::GET),
+      putDescription(MethodDescription::type::PUT),
+      postDescription(MethodDescription::type::POST),
+      deleteDescription(MethodDescription::type::DELETE)*/
 {
     /*m_listener.support(methods::GET, std::bind(&Customer::handle_get, this, std::placeholders::_1));
     m_listener.support(methods::PUT, std::bind(&Customer::handle_put, this, std::placeholders::_1));
@@ -15,11 +19,11 @@ Customer::Customer(utility::string_t url)
     m_listener.support(methods::DEL, std::bind(&Customer::handle_delete, this, std::placeholders::_1));*/
 }
 
-void Customer::handle_get(http_request message)
+void Customer::handleGet(http_request &message)
 {
     ucout << message.to_string() << endl;
 
-    message.reply(status_codes::NotFound, "{\"key\":\"test\"}");
+    message.reply(status_codes::NotFound, "{\"key\":\"test\",\"customer\":\"tz\"}");
 };
 
 /*void Customer::handle_post(http_request message)

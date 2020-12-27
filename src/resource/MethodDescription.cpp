@@ -1,21 +1,14 @@
 #include "MethodDescription.hpp"
 
-MethodDescription::MethodDescription(enum MethodDescription::type type,
-                                     int pathParamLen,
+MethodDescription::MethodDescription(int pathParamLen,
                                      std::unordered_map<std::string, std::string> header,
                                      std::unordered_set<std::string> requiredParam,
                                      std::unordered_set<std::string> optionalParam)
-    : type(type),
-      pathParamLen(pathParamLen),
+    : pathParamLen(pathParamLen),
       header(header),
       requiredParam(requiredParam),
       optionalParam(optionalParam)
 {
-}
-
-const enum MethodDescription::type MethodDescription::getType() const
-{
-    return type;
 }
 
 int MethodDescription::getPathParamLen() const

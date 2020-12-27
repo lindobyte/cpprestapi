@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../Webservice.hpp"
+#include "MethodDescription.hpp"
 
 class ResourceController
 {
 public:
-    ResourceController(utility::string_t &url);
+    ResourceController(utility::string_t url);
 
     ~ResourceController();
 
@@ -19,6 +20,11 @@ protected:
     virtual void handlePut(web::http::http_request &message);
     virtual void handlePost(web::http::http_request &message);
     virtual void handleDelete(web::http::http_request &message);
+
+    MethodDescription getDescription;
+    MethodDescription putDescription;
+    MethodDescription postDescription;
+    MethodDescription deleteDescription;
 
 #if 0
     /// It validates required information into the Http headers.

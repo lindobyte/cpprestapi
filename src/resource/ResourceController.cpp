@@ -6,9 +6,11 @@ using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
 
-ResourceController::ResourceController(utility::string_t &url)
+ResourceController::ResourceController(utility::string_t url)
     : m_listener(url)
 {
+    cout << "Listening for requests at: " << url << endl;
+
     m_listener.support(methods::GET,
                        std::bind(&ResourceController::handleRequest, this, std::placeholders::_1));
     m_listener.support(methods::PUT,

@@ -1,26 +1,29 @@
 #include "../resource/customer/Customer.hpp"
+#include "../resource/catalog/Catalog.hpp"
 
-std::unique_ptr<Customer> g_httpDealer;
+std::unique_ptr<Customer> g_httpDealer1;
+std::unique_ptr<Catalog> g_httpDealer2;
 
 void on_initialize(const string_t& address)
 {
     // Build our listener's URI from the configured address and the hard-coded path "blackjack/dealer"
-
     uri_builder uri(address);
-    uri.append_path(U("customer"));
 
-    auto addr = uri.to_uri().to_string();
-    g_httpDealer = std::unique_ptr<Customer>(new Customer(addr));
-    g_httpDealer->open().wait();
+    /* customer */
+    g_httpDealer1 = std::unique_ptr<Customer>(new Customer(uri));
+    g_httpDealer1->open().wait();
 
-    ucout << utility::string_t(U("Listening for requests at: ")) << addr << std::endl;
+    /* catalog */
+    g_httpDealer2 = std::unique_ptr<Catalog>(new Catalog(uri));
+    g_httpDealer2->open().wait();
 
     return;
 }
 
 void on_shutdown()
 {
-    g_httpDealer->close().wait();
+    g_httpDealer1->close().wait();
+    g_httpDealer2->close().wait();
     return;
 }
 

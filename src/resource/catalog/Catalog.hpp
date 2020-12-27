@@ -9,11 +9,10 @@ using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-class Customer : public ResourceController
+class Catalog : public ResourceController
 {
 public:
-    //Customer() {}
-    Customer(uri_builder uri);
+    Catalog(uri_builder uri);
 
 private:
     void handleGet(http_request &message);

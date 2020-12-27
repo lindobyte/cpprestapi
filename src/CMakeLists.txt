@@ -3,6 +3,7 @@ if (UNIX)
 endif()
 
 add_library(${WS_LIB_NAME}
+            ${CMAKE_CURRENT_SOURCE_DIR}/resource/catalog/Catalog.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/customer/Customer.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/ResourceController.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/MethodDescription.cpp

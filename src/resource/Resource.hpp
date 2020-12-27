@@ -3,12 +3,12 @@
 #include "../Webservice.hpp"
 #include "MethodDescription.hpp"
 
-class ResourceController
+class Resource
 {
 public:
-    ResourceController(utility::string_t url);
+    Resource(utility::string_t url);
 
-    ~ResourceController();
+    ~Resource();
 
     void handleRequest(web::http::http_request message);
 

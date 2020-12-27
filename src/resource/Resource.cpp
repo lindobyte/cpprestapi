@@ -1,4 +1,4 @@
-#include "ResourceController.hpp"
+#include "Resource.hpp"
 
 using namespace std;
 using namespace web;
@@ -6,36 +6,36 @@ using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
 
-ResourceController::ResourceController(utility::string_t url)
+Resource::Resource(utility::string_t url)
     : m_listener(url)
 {
     cout << "Listening for requests at: " << url << endl;
 
     m_listener.support(methods::GET,
-                       std::bind(&ResourceController::handleRequest, this, std::placeholders::_1));
+                       std::bind(&Resource::handleRequest, this, std::placeholders::_1));
     m_listener.support(methods::PUT,
-                       std::bind(&ResourceController::handleRequest, this, std::placeholders::_1));
+                       std::bind(&Resource::handleRequest, this, std::placeholders::_1));
     m_listener.support(methods::POST,
-                       std::bind(&ResourceController::handleRequest, this, std::placeholders::_1));
+                       std::bind(&Resource::handleRequest, this, std::placeholders::_1));
     m_listener.support(methods::DEL,
-                       std::bind(&ResourceController::handleRequest, this, std::placeholders::_1));
+                       std::bind(&Resource::handleRequest, this, std::placeholders::_1));
 }
 
-ResourceController::~ResourceController()
+Resource::~Resource()
 {
 }
 
-pplx::task<void> ResourceController::open()
+pplx::task<void> Resource::open()
 {
     return m_listener.open();
 }
 
-pplx::task<void> ResourceController::close()
+pplx::task<void> Resource::close()
 {
     return m_listener.close();
 }
 
-void ResourceController::handleRequest(http_request message)
+void Resource::handleRequest(http_request message)
 {
     if(message.method() ==  http::methods::GET) {
         handleGet(message);
@@ -54,7 +54,7 @@ void ResourceController::handleRequest(http_request message)
     }
 }
 
-void ResourceController::handleGet(http_request &message)
+void Resource::handleGet(http_request &message)
 {
     ucout << message.to_string() << endl;
 
@@ -62,21 +62,21 @@ void ResourceController::handleGet(http_request &message)
     message.reply(status_codes::MethodNotAllowed);
 };
 
-void ResourceController::handlePut(http_request &message)
+void Resource::handlePut(http_request &message)
 {
     ucout << message.to_string() << endl;
 
     message.reply(status_codes::MethodNotAllowed);
 };
 
-void ResourceController::handlePost(http_request &message)
+void Resource::handlePost(http_request &message)
 {
     ucout << message.to_string() << endl;
 
     message.reply(status_codes::MethodNotAllowed);
 };
 
-void ResourceController::handleDelete(http_request &message)
+void Resource::handleDelete(http_request &message)
 {
     ucout << message.to_string() << endl;
 

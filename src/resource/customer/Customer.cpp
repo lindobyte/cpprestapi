@@ -7,7 +7,7 @@ using namespace http;
 using namespace web::http::experimental::listener;
 
 Customer::Customer(uri_builder uri)
-    : ResourceController(uri.append_path(U("customer")).to_string())/*,
+    : Resource(uri.append_path(U("customer")).to_string())/*,
       getDescription(MethodDescription::type::GET),
       putDescription(MethodDescription::type::PUT),
       postDescription(MethodDescription::type::POST),

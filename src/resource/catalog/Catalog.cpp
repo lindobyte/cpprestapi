@@ -9,8 +9,8 @@ using namespace web::http::experimental::listener;
 utility::string_t test = "blabla";
 
 Catalog::Catalog(uri_builder uri)
-    : ResourceController(uri.append_path(U("catalog")).to_string())
-    /*: ResourceController(uri.append_path(U("catalog")).to_uri().to_string()),
+    : Resource(uri.append_path(U("catalog")).to_string())
+    /*: Resource(uri.append_path(U("catalog")).to_uri().to_string()),
       getDescription(MethodDescription::type::GET),
       putDescription(MethodDescription::type::PUT),
       postDescription(MethodDescription::type::POST),

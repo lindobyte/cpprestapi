@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Webservice.hpp"
-#include "../ResourceController.hpp"
+#include "../Resource.hpp"
 #include "../MethodDescription.hpp"
 
 using namespace web;
@@ -9,7 +9,7 @@ using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-class Customer : public ResourceController
+class Customer : public Resource
 {
 public:
     //Customer() {}

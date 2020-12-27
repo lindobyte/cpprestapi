@@ -1,8 +1,7 @@
-#include "../resource/customer/Customer.hpp"
-#include "../resource/catalog/Catalog.hpp"
+#include "../resource/ResourceFactory.hpp"
 
-std::unique_ptr<Customer> g_httpDealer1;
-std::unique_ptr<Catalog> g_httpDealer2;
+std::unique_ptr<Resource> g_httpDealer1;
+std::unique_ptr<Resource> g_httpDealer2;
 
 void on_initialize(const string_t& address)
 {
@@ -10,11 +9,11 @@ void on_initialize(const string_t& address)
     uri_builder uri(address);
 
     /* customer */
-    g_httpDealer1 = std::unique_ptr<Customer>(new Customer(uri));
+    g_httpDealer1 = ResourceFactory::create(ResourceFactory::resourceType::Customer, uri);
     g_httpDealer1->open().wait();
 
     /* catalog */
-    g_httpDealer2 = std::unique_ptr<Catalog>(new Catalog(uri));
+    g_httpDealer2 = ResourceFactory::create(ResourceFactory::resourceType::Catalog, uri);
     g_httpDealer2->open().wait();
 
     return;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Webservice.hpp"
-#include "../ResourceController.hpp"
+#include "../Resource.hpp"
 #include "../MethodDescription.hpp"
 
 using namespace web;
@@ -9,7 +9,7 @@ using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-class Catalog : public ResourceController
+class Catalog : public Resource
 {
 public:
     Catalog(uri_builder uri);

@@ -8,6 +8,7 @@ add_library(${WS_LIB_NAME}
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/MethodDescription.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/Resource.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/resource/ResourceFactory.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/Const.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/Webservice.cpp)
 
 # speed up compilation

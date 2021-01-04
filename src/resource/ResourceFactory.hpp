@@ -3,13 +3,20 @@
 #include "customer/Customer.hpp"
 #include "catalog/Catalog.hpp"
 
-class ResourceFactory {
+class ResourceFactory
+{
 public:
     enum class resourceType {
         Catalog,
-        Customer
+        Customer,
+
+        Last // Needed for iteration
     };
 
-    static std::unique_ptr<Resource> create(enum ResourceFactory::resourceType type,
+    /*resourceType operator++(resourceType& x) {
+        return x = (resourceType)(std::underlying_type<resourceType>::type(x) + 1);
+    }*/
+
+    static std::shared_ptr<Resource> create(enum ResourceFactory::resourceType type,
                                             const uri_builder &uri);
 };

@@ -1,6 +1,22 @@
 #include "Webservice.hpp"
+#include "resource/ResourceFactory.hpp"
 
-const utility::string_t headerKey::contentType = "content-type";
-const utility::string_t headerKey::accept      = "accept";
+Webservice::Webservice(std::string &address,
+                       std::string &port)
+    : address(address)
+{
+    address.append(port);
+}
 
-const utility::string_t headerValue::applicationJson = "application/json";
+void Webservice::initialize()
+{
+
+    /*for(int i = 0; i != ResourceFactory.resourceType.Last; i++) {
+
+    }*/
+}
+
+void Webservice::shutdown()
+{
+}
+

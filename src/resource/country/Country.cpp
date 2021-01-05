@@ -14,6 +14,7 @@ Country::Country(uri_builder uri)
       postDescription(MethodDescription::type::POST),
       deleteDescription(MethodDescription::type::DELETE)*/
 {
+    getDescription = MethodDescription(1);
 }
 
 void Country::handleGet(http_request &message)

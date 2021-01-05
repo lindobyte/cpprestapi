@@ -15,6 +15,8 @@ public:
     pplx::task<void> open();
     pplx::task<void> close();
 
+    
+
 protected:
     MethodDescription getDescription;
     MethodDescription putDescription;

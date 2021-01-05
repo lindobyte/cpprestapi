@@ -1,4 +1,5 @@
 #include "../resource/ResourceFactory.hpp"
+#include "../Webservice.hpp"
 
 #include <list>
 
@@ -35,27 +36,17 @@ void on_shutdown()
 
 int main(int argc, char* argv[])
 {
-#if 0
-    std::cout << "Hello World!\n";
-
-    return 0;
-#else
-    utility::string_t port = U("34568");
-    if (argc == 2)
-    {
-        port = argv[1];
-    }
-
+    utility::string_t port = U("8885");
     utility::string_t address = U("http://localhost:");
-    address.append(port);
+    Webservice ws(address, port);
 
-    on_initialize(address);
+    ws.initialize();
+
     std::cout << "Press ENTER to exit." << std::endl;
-
     std::string line;
     std::getline(std::cin, line);
 
-    on_shutdown();
+    ws.shutdown();
+
     return 0;
-#endif
 }

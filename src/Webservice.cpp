@@ -5,18 +5,26 @@ Webservice::Webservice(std::string &address,
                        std::string &port)
     : address(address)
 {
-    address.append(port);
+    this->address.append(port);
 }
 
 void Webservice::initialize()
 {
+    uri_builder uri(address);
 
-    /*for(int i = 0; i != ResourceFactory.resourceType.Last; i++) {
+    for(int i = 0; i != (int)ResourceFactory::resourceType::Last; i++) {
+        std::shared_ptr<Resource> resource = ResourceFactory::create(
+            static_cast<ResourceFactory::resourceType>(i), uri);
 
-    }*/
+        resource->open().wait();
+        resourceList.push_back(resource);
+    }
 }
 
 void Webservice::shutdown()
 {
+    for(std::shared_ptr<Resource> resource : resourceList) {
+        resource->close().wait();
+    }
 }
 

@@ -12,6 +12,9 @@ std::shared_ptr<Resource> ResourceFactory::create(enum ResourceFactory::resource
     case resourceType::Customer:
         result = std::shared_ptr<Customer>(new Customer(uri));
         break;
+    case resourceType::Last:
+        // TODO: Error handling!!!
+        break;
     }
 
     return result;

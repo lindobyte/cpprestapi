@@ -1,4 +1,4 @@
-#include "Catalog.hpp"
+#include "Country.hpp"
 
 using namespace std;
 using namespace web;
@@ -6,11 +6,9 @@ using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
 
-utility::string_t test = "blabla";
-
-Catalog::Catalog(uri_builder uri)
-    : Resource(uri.append_path(U("catalog")).to_string())
-    /*: Resource(uri.append_path(U("catalog")).to_uri().to_string()),
+Country::Country(uri_builder uri)
+    : Resource(uri.append_path(U("country")).to_string())
+    /*: Resource(uri.append_path(U("Country")).to_uri().to_string()),
       getDescription(MethodDescription::type::GET),
       putDescription(MethodDescription::type::PUT),
       postDescription(MethodDescription::type::POST),
@@ -18,28 +16,28 @@ Catalog::Catalog(uri_builder uri)
 {
 }
 
-void Catalog::handleGet(http_request &message)
+void Country::handleGet(http_request &message)
 {
     ucout << message.to_string() << endl;
 
-    message.reply(status_codes::NotFound, "{\"key\":\"test\",\"catalog\":\"tz\"}");
+    message.reply(status_codes::OK, "{\"key\":\"test\",\"Country\":\"tz\"}");
 };
 
-/*void Catalog::handle_post(http_request message)
-{
-    ucout << message.to_string() << endl;
-
-    message.reply(status_codes::MethodNotAllowed);
-};
-
-void Catalog::handle_delete(http_request message)
+/*void Country::handle_post(http_request message)
 {
     ucout << message.to_string() << endl;
 
     message.reply(status_codes::MethodNotAllowed);
 };
 
-void Catalog::handle_put(http_request message)
+void Country::handle_delete(http_request message)
+{
+    ucout << message.to_string() << endl;
+
+    message.reply(status_codes::MethodNotAllowed);
+};
+
+void Country::handle_put(http_request message)
 {
     ucout << message.to_string() << endl;
 

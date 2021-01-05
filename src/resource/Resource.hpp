@@ -16,15 +16,17 @@ public:
     pplx::task<void> close();
 
 protected:
+    MethodDescription getDescription;
+    MethodDescription putDescription;
+    MethodDescription postDescription;
+    MethodDescription deleteDescription;
+
     virtual void handleGet(web::http::http_request &message);
     virtual void handlePut(web::http::http_request &message);
     virtual void handlePost(web::http::http_request &message);
     virtual void handleDelete(web::http::http_request &message);
 
-    MethodDescription getDescription;
-    MethodDescription putDescription;
-    MethodDescription postDescription;
-    MethodDescription deleteDescription;
+    
 
 #if 0
     /// It validates required information into the Http headers.

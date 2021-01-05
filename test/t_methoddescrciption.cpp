@@ -27,9 +27,9 @@ TEST(methodDescription, standardValues)
 TEST(methodDescription, specifiedValues)
 {
     MethodDescription method(2,
-                             {{"key1", "value1"},{"key2","value2"}},
                              {"param1","param2","param3", "param1"},
-                             {"oparam1", "oparam2"});
+                             {"oparam1", "oparam2"},
+                             {{"key1", "value1"},{"key2","value2"}});
 
     EXPECT_EQ(method.getPathParamLen(), 2);
 

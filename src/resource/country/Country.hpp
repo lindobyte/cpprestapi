@@ -9,10 +9,10 @@ using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-class Catalog : public Resource
+class Country : public Resource
 {
 public:
-    Catalog(uri_builder uri);
+    Country(uri_builder uri);
 
 private:
     void handleGet(http_request &message);

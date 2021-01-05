@@ -1,9 +1,9 @@
 #include "MethodDescription.hpp"
 
 MethodDescription::MethodDescription(int pathParamLen,
-                                     std::unordered_map<std::string, std::string> header,
                                      std::unordered_set<std::string> requiredParam,
-                                     std::unordered_set<std::string> optionalParam)
+                                     std::unordered_set<std::string> optionalParam,
+                                     std::unordered_map<std::string, std::string> header)
     : pathParamLen(pathParamLen),
       header(header),
       requiredParam(requiredParam),

@@ -1,13 +1,13 @@
 #include "../Webservice.hpp"
 #include "Resource.hpp"
 #include "customer/Customer.hpp"
-#include "catalog/Catalog.hpp"
+#include "country/Country.hpp"
 
 class ResourceFactory
 {
 public:
     enum class resourceType {
-        Catalog,
+        Country,
         Customer,
 
         Last // Needed for iteration

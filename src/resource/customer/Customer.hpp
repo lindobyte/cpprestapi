@@ -12,7 +12,6 @@ using namespace http::experimental::listener;
 class Customer : public Resource
 {
 public:
-    //Customer() {}
     Customer(uri_builder uri);
 
 private:

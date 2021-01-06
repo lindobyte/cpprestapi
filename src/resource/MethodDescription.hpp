@@ -10,7 +10,7 @@ class MethodDescription
 public:
     MethodDescription(int pathParamLen = 0,
                       std::unordered_set<std::string> requiredParam = {},
-                      std::unordered_set<std::string> optionalParam = {},  
+                      std::unordered_set<std::string> optionalParam = {},
                       std::unordered_map<std::string, std::string> header = {
                           {headerKey::contentType, headerValue::applicationJson},
                           {headerKey::accept,      headerValue::applicationJson}

@@ -7,15 +7,12 @@ class Resource
 {
 public:
     Resource(utility::string_t url);
-
     ~Resource();
 
     void handleRequest(web::http::http_request message);
 
     pplx::task<void> open();
     pplx::task<void> close();
-
-    
 
 protected:
     MethodDescription getDescription;
@@ -28,7 +25,8 @@ protected:
     virtual void handlePost(web::http::http_request &message);
     virtual void handleDelete(web::http::http_request &message);
 
-    
+    virtual void validate(web::http::http_request &message,
+                          MethodDescription &description);
 
 #if 0
     /// It validates required information into the Http headers.
@@ -80,6 +78,11 @@ protected:
 
 private:
     web::http::experimental::listener::http_listener m_listener;
+
+    void validateHeader(const web::http::http_headers &request_header,
+                        const std::unordered_map<std::string, std::string> &desc_header);
+
+
     /*std::string baseUrl;
     std::string requestURI;
     std::string requestHost;

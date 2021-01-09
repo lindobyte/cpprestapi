@@ -13,15 +13,25 @@ TEST(methodDescription, standardValues)
     EXPECT_EQ(pathParamLen, 0);
 
     const unordered_map<string, string> header = method.getHeader();
-    ASSERT_EQ(header.size(), 2);
-    EXPECT_EQ(header.at(headerKey::contentType), headerValue::applicationJson);
-    EXPECT_EQ(header.at(headerKey::accept),      headerValue::applicationJson);
+    ASSERT_EQ(header.size(), 0);
 
-    const unordered_set<string> requiredParam = method.getRequiredParam();
-    EXPECT_TRUE(requiredParam.empty());
+    const unordered_set<string> requiredQueryParam = method.getRequiredQueryParam();
+    EXPECT_TRUE(requiredQueryParam.empty());
+    const unordered_set<string> optionalQueryParam = method.getOptionalQueryParam();
+    EXPECT_TRUE(optionalQueryParam.empty());
 
-    const unordered_set<string> optionalParam = method.getOptionalParam();
-    EXPECT_TRUE(optionalParam.empty());
+    const unordered_set<string> requiredBodyParam = method.getRequiredBodyParam();
+    EXPECT_TRUE(requiredBodyParam.empty());
+    const unordered_set<string> optionalBodyParam = method.getOptionalBodyParam();
+    EXPECT_TRUE(optionalBodyParam.empty());
+
+    const unordered_set<string> accept = method.getAccept();
+    ASSERT_EQ(accept.size(), 1);
+    EXPECT_EQ(accept.count(headerValue::applicationJson), 1);
+
+    const unordered_set<string> contentType = method.getContentType();
+    ASSERT_EQ(contentType.size(), 1);
+    EXPECT_EQ(contentType.count(headerValue::applicationJson), 1);
 }
 
 TEST(methodDescription, specifiedValues)
@@ -29,6 +39,10 @@ TEST(methodDescription, specifiedValues)
     MethodDescription method(2,
                              {"param1","param2","param3", "param1"},
                              {"oparam1", "oparam2"},
+                             {"bparam1","bparam2","bparam3", "bparam1"},
+                             {"boparam1", "boparam2"},
+                             {"contentJson", "contentXml"},
+                             {"acceptJson", "acceptXml"},
                              {{"key1", "value1"},{"key2","value2"}});
 
     EXPECT_EQ(method.getPathParamLen(), 2);
@@ -38,18 +52,41 @@ TEST(methodDescription, specifiedValues)
     EXPECT_EQ(header.at("key1"), "value1");
     EXPECT_EQ(header.at("key2"), "value2");
 
-    const unordered_set<string> requiredParam = method.getRequiredParam();
-    ASSERT_EQ(requiredParam.size(), 3);
-    EXPECT_EQ(requiredParam.count("param1"), 1);
-    EXPECT_EQ(requiredParam.count("param2"), 1);
-    EXPECT_EQ(requiredParam.count("param3"), 1);
-    EXPECT_EQ(requiredParam.count("param"),  0);
+    const unordered_set<string> requiredQueryParam = method.getRequiredQueryParam();
+    ASSERT_EQ(requiredQueryParam.size(), 3);
+    EXPECT_EQ(requiredQueryParam.count("param1"), 1);
+    EXPECT_EQ(requiredQueryParam.count("param2"), 1);
+    EXPECT_EQ(requiredQueryParam.count("param3"), 1);
+    EXPECT_EQ(requiredQueryParam.count("param"),  0);
 
-    const unordered_set<string> optionalParam = method.getOptionalParam();
-    ASSERT_EQ(optionalParam.size(), 2);
-    EXPECT_EQ(optionalParam.count("oparam1"), 1);
-    EXPECT_EQ(optionalParam.count("oparam2"), 1);
-    EXPECT_EQ(optionalParam.count("oparam"),  0);
+    const unordered_set<string> optionalQueryParam = method.getOptionalQueryParam();
+    ASSERT_EQ(optionalQueryParam.size(), 2);
+    EXPECT_EQ(optionalQueryParam.count("oparam1"), 1);
+    EXPECT_EQ(optionalQueryParam.count("oparam2"), 1);
+    EXPECT_EQ(optionalQueryParam.count("oparam"),  0);
+
+    const unordered_set<string> requiredBodyParam = method.getRequiredBodyParam();
+    ASSERT_EQ(requiredBodyParam.size(), 3);
+    EXPECT_EQ(requiredBodyParam.count("bparam1"), 1);
+    EXPECT_EQ(requiredBodyParam.count("bparam2"), 1);
+    EXPECT_EQ(requiredBodyParam.count("bparam3"), 1);
+    EXPECT_EQ(requiredBodyParam.count("bparam"),  0);
+
+    const unordered_set<string> optionalBodyParam = method.getOptionalBodyParam();
+    ASSERT_EQ(optionalBodyParam.size(), 2);
+    EXPECT_EQ(optionalBodyParam.count("boparam1"), 1);
+    EXPECT_EQ(optionalBodyParam.count("boparam2"), 1);
+    EXPECT_EQ(optionalBodyParam.count("boparam"),  0);
+
+    const unordered_set<string> contentType = method.getContentType();
+    ASSERT_EQ(contentType.size(), 2);
+    EXPECT_EQ(contentType.count("contentJson"), 1);
+    EXPECT_EQ(contentType.count("contentXml"), 1);
+
+    const unordered_set<string> accept = method.getAccept();
+    ASSERT_EQ(accept.size(), 2);
+    EXPECT_EQ(accept.count("acceptJson"), 1);
+    EXPECT_EQ(accept.count("acceptXml"), 1);
 }
 
 

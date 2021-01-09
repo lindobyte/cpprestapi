@@ -1,13 +1,21 @@
 #include "MethodDescription.hpp"
 
 MethodDescription::MethodDescription(int pathParamLen,
-                                     std::unordered_set<std::string> requiredParam,
-                                     std::unordered_set<std::string> optionalParam,
+                                     std::unordered_set<std::string> requiredQueryParam,
+                                     std::unordered_set<std::string> optionalQueryParam,
+                                     std::unordered_set<std::string> requiredBodyParam,
+                                     std::unordered_set<std::string> optionalBodyParam,
+                                     std::unordered_set<std::string> contentType,
+                                     std::unordered_set<std::string> accept,
                                      std::unordered_map<std::string, std::string> header)
     : pathParamLen(pathParamLen),
-      header(header),
-      requiredParam(requiredParam),
-      optionalParam(optionalParam)
+      requiredQueryParam(requiredQueryParam),
+      optionalQueryParam(optionalQueryParam),
+      requiredBodyParam(requiredBodyParam),
+      optionalBodyParam(optionalBodyParam),
+      contentType(contentType),
+      accept(accept),
+      header(header)
 {
 }
 
@@ -21,12 +29,32 @@ const std::unordered_map<std::string, std::string>& MethodDescription::getHeader
     return header;
 }
 
-const std::unordered_set<std::string>& MethodDescription::getRequiredParam() const
+const std::unordered_set<std::string>& MethodDescription::getRequiredQueryParam() const
 {
-    return requiredParam;
+    return requiredQueryParam;
 }
 
-const std::unordered_set<std::string>& MethodDescription::getOptionalParam() const
+const std::unordered_set<std::string>& MethodDescription::getOptionalQueryParam() const
 {
-    return optionalParam;
+    return optionalQueryParam;
+}
+
+const std::unordered_set<std::string>& MethodDescription::getRequiredBodyParam() const
+{
+    return requiredBodyParam;
+}
+
+const std::unordered_set<std::string>& MethodDescription::getOptionalBodyParam() const
+{
+    return optionalBodyParam;
+}
+
+const std::unordered_set<std::string>& MethodDescription::getContentType() const
+{
+    return contentType;
+}
+
+const std::unordered_set<std::string>& MethodDescription::getAccept() const
+{
+    return accept;
 }

@@ -1,4 +1,5 @@
 #include "Resource.hpp"
+#include "../Const.hpp"
 
 #include <boost/algorithm/string.hpp>
 
@@ -92,22 +93,45 @@ void Resource::handleDelete(http_request &message)
     message.reply(status_codes::MethodNotAllowed);
 };
 
+void Resource::validateSpecifiedHeader(const web::http::http_headers &request_header,
+                                       const std::string &key,
+                                       const std::string &value)
+{
+    web::http::http_headers::const_iterator it;
+
+    it = request_header.find(key);
+    if(it != request_header.end()) {
+        if(!boost::iequals(it->second, value)) {
+            throw invalid_argument("Header <" + key + ":" + it->second + "> is invalid, " +
+                                   "expected <" + key + ":" + value + ">");
+        }
+    }
+    else {
+        throw invalid_argument("Header key <" + key + "> is not available");
+    }
+}
+
+void Resource::validateContentType(const web::http::http_headers &request_header,
+                                   const std::unordered_set<std::string> &contentTypes)
+{
+    for(const auto &contentType : contentTypes) {
+        validateSpecifiedHeader(request_header, headerKey::contentType, contentType);
+    }
+}
+
+void Resource::validateAccept(const web::http::http_headers &request_header,
+                              const std::unordered_set<std::string> &accepts)
+{
+    for(const auto &accept : accepts) {
+        validateSpecifiedHeader(request_header, headerKey::accept, accept);
+    }
+}
+
 void Resource::validateHeader(const web::http::http_headers &request_header,
                               const std::unordered_map<std::string, std::string> &desc_header)
 {
     for(const auto &elem : desc_header) {
-        web::http::http_headers::const_iterator it;
-
-        it = request_header.find(elem.first);
-        if(it != request_header.end()) {
-            if(!boost::iequals(it->second, elem.second)) {
-                throw invalid_argument("Header <" + elem.first + ":" + it->second + "> is invalid,"
-                                       + " expected <" + elem.first + ":" + elem.second + ">");
-            }
-        }
-        else {
-            throw invalid_argument("Header key <" + elem.first + "> is not available");
-        }
+        validateSpecifiedHeader(request_header, elem.first, elem.second);
     }
 }
 
@@ -115,4 +139,6 @@ void Resource::validate(web::http::http_request &message,
                         MethodDescription &description)
 {
     validateHeader(message.headers(), description.getHeader());
+    validateAccept(message.headers(), description.getAccept());
+    validateContentType(message.headers(), description.getContentType());
 }

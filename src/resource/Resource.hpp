@@ -79,8 +79,16 @@ protected:
 private:
     web::http::experimental::listener::http_listener m_listener;
 
+    void validateSpecifiedHeader(const web::http::http_headers &request_header,
+                                 const std::string &key,
+                                 const std::string &value);
+    void validateContentType(const web::http::http_headers &request_header,
+                             const std::unordered_set<std::string> &contentTypes);
+    void validateAccept(const web::http::http_headers &request_header,
+                        const std::unordered_set<std::string> &accepts);
     void validateHeader(const web::http::http_headers &request_header,
                         const std::unordered_map<std::string, std::string> &desc_header);
+
 
 
     /*std::string baseUrl;

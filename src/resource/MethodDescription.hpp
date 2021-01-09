@@ -8,7 +8,9 @@
 class MethodDescription
 {
 public:
-    MethodDescription(int pathParamLen = 0,
+    MethodDescription();
+
+    MethodDescription(int pathParamLen,
                       std::unordered_set<std::string> requiredQueryParam = {},
                       std::unordered_set<std::string> optionalQueryParam = {},
                       std::unordered_set<std::string> requiredBodyParam = {},
@@ -26,6 +28,8 @@ public:
     const std::unordered_set<std::string>& getContentType() const;
     const std::unordered_set<std::string>& getAccept() const;
 
+    bool isInitialized();
+
 private:
     int pathParamLen;
     std::unordered_map<std::string, std::string> header;
@@ -35,4 +39,6 @@ private:
     std::unordered_set<std::string> optionalBodyParam;
     std::unordered_set<std::string> contentType;
     std::unordered_set<std::string> accept;
+
+    bool initialized;
 };

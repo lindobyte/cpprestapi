@@ -15,7 +15,7 @@ public:
     Country(uri_builder uri);
 
 private:
-    void handleGet(http_request &message);
+    void handleGet(http_request &message) override;
     /*void handle_put(http_request message);
     void handle_post(http_request message);
     void handle_delete(http_request message);*/

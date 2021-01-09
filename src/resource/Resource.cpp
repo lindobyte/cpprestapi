@@ -9,6 +9,9 @@ using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
 
+#define RA_CONFIG_BITMASK_IGNORE_CONTENT_TYPE 1
+
+
 Resource::Resource(utility::string_t url)
     : m_listener(url)
 {
@@ -42,16 +45,19 @@ void Resource::handleRequest(http_request message)
 {
     try {
         if(message.method() ==  http::methods::GET) {
-            validate(message, getDescription);
+            validate(message, getDescription, RA_CONFIG_BITMASK_IGNORE_CONTENT_TYPE);
             handleGet(message);
         }
         else if(message.method() ==  http::methods::PUT) {
+            validate(message, putDescription);
             handlePut(message);
         }
         else if(message.method() ==  http::methods::POST) {
+            validate(message, postDescription);
             handlePost(message);
         }
         else if(message.method() ==  http::methods::DEL) {
+            validate(message, deleteDescription);
             handleDelete(message);
         }
         else {
@@ -136,9 +142,14 @@ void Resource::validateHeader(const web::http::http_headers &request_header,
 }
 
 void Resource::validate(web::http::http_request &message,
-                        MethodDescription &description)
+                        MethodDescription &description,
+                        uint16_t configBitmask)
 {
-    validateHeader(message.headers(), description.getHeader());
-    validateAccept(message.headers(), description.getAccept());
-    validateContentType(message.headers(), description.getContentType());
+    if(description.isInitialized()) {
+        validateHeader(message.headers(), description.getHeader());
+        validateAccept(message.headers(), description.getAccept());
+        if(!(configBitmask & RA_CONFIG_BITMASK_IGNORE_CONTENT_TYPE)) {
+            validateContentType(message.headers(), description.getContentType());
+        }
+    }
 }

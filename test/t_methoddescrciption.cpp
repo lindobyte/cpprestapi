@@ -5,10 +5,13 @@ using namespace std;
 
 TEST(methodDescription, standardValues)
 {
+    MethodDescription m;
+    EXPECT_FALSE(m.isInitialized());
+
+    MethodDescription method(0);
+    EXPECT_TRUE(method.isInitialized());
+
     int pathParamLen;
-
-    MethodDescription method;
-
     pathParamLen = method.getPathParamLen();
     EXPECT_EQ(pathParamLen, 0);
 

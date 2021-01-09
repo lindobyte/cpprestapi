@@ -26,7 +26,8 @@ protected:
     virtual void handleDelete(web::http::http_request &message);
 
     virtual void validate(web::http::http_request &message,
-                          MethodDescription &description);
+                          MethodDescription &description,
+                          uint16_t configBitmask = 0);
 
 #if 0
     /// It validates required information into the Http headers.

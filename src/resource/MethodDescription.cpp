@@ -1,5 +1,10 @@
 #include "MethodDescription.hpp"
 
+MethodDescription::MethodDescription()
+    : initialized(false)
+{
+}
+
 MethodDescription::MethodDescription(int pathParamLen,
                                      std::unordered_set<std::string> requiredQueryParam,
                                      std::unordered_set<std::string> optionalQueryParam,
@@ -15,7 +20,8 @@ MethodDescription::MethodDescription(int pathParamLen,
       optionalBodyParam(optionalBodyParam),
       contentType(contentType),
       accept(accept),
-      header(header)
+      header(header),
+      initialized(true)
 {
 }
 
@@ -57,4 +63,9 @@ const std::unordered_set<std::string>& MethodDescription::getContentType() const
 const std::unordered_set<std::string>& MethodDescription::getAccept() const
 {
     return accept;
+}
+
+bool MethodDescription::isInitialized()
+{
+    return initialized;
 }

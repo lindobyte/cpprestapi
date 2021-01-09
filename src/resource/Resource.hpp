@@ -90,7 +90,8 @@ private:
     void validateHeader(const web::http::http_headers &request_header,
                         const std::unordered_map<std::string, std::string> &desc_header);
 
-
+    void validatePathParameter(const web::uri &request_uri,
+                               MethodDescription &description);
 
     /*std::string baseUrl;
     std::string requestURI;

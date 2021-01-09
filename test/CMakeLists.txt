@@ -11,7 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/test")
 
 add_executable(${WS_TEST_NAME}
                t_methoddescrciption.cpp
-               t_resource.cpp
+               t_validate.cpp
                main.cpp)
 
 # speed up compilation

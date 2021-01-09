@@ -65,9 +65,22 @@ void Resource::handleRequest(http_request message)
             message.reply(status_codes::MethodNotAllowed);
         }
     }
-    catch (const std::invalid_argument& ia) {
+    catch(const std::invalid_argument& ia) {
         message.reply(status_codes::BadRequest,
                       std::string("{\"errorMsg\": \"") + ia.what() + std::string("\"}"));
+    }
+    catch (const std::overflow_error& e) {
+        message.reply(status_codes::InternalError,
+                      std::string("{\"errorMsg\": \"") + e.what() + std::string("\"}"));
+    } catch (const std::runtime_error& e) {
+        message.reply(status_codes::InternalError,
+                      std::string("{\"errorMsg\": \"") + e.what() + std::string("\"}"));
+    } catch (const std::exception& e) {
+        message.reply(status_codes::InternalError,
+                      std::string("{\"errorMsg\": \"") + e.what() + std::string("\"}"));
+    } catch (...) {
+        message.reply(status_codes::InternalError,
+                      std::string("{\"errorMsg\": \"Undefined error\"}"));
     }
 }
 
@@ -141,6 +154,18 @@ void Resource::validateHeader(const web::http::http_headers &request_header,
     }
 }
 
+void Resource::validatePathParameter(const web::uri &request_uri,
+                                     MethodDescription &description)
+{
+    size_t pathSize = uri::split_path(request_uri.path()).size() - 1;
+
+    if(description.getPathParamLen() != pathSize) {
+        throw invalid_argument("Invalid length of path parameter, expected " +
+                               std::to_string(description.getPathParamLen()) +
+                               " but was " + std::to_string(pathSize));
+    }
+}
+
 void Resource::validate(web::http::http_request &message,
                         MethodDescription &description,
                         uint16_t configBitmask)
@@ -151,5 +176,8 @@ void Resource::validate(web::http::http_request &message,
         if(!(configBitmask & RA_CONFIG_BITMASK_IGNORE_CONTENT_TYPE)) {
             validateContentType(message.headers(), description.getContentType());
         }
+
+        const uri request_uri = message.request_uri();
+        validatePathParameter(request_uri, description);
     }
 }
